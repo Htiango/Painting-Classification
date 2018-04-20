@@ -61,7 +61,7 @@ def retrieve_image():
                 with open(filepath, 'wb') as f:
                     response.raw.decode_content = True
                     shutil.copyfileobj(response.raw, f)
-                    print("["+str(count)  + "] - Save file: " + title)
+                    print("["+str(count)  + "] - Save file: " + name)
                     success += 1
             except Exception as e:
                 print("["+str(count)  + "] - Fail")
