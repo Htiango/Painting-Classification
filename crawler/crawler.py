@@ -9,6 +9,7 @@ def retrieve_style_json():
     print("retrieving styles json ... ")
     dic = {}
     for style in STYLES:
+        dic[style] = []
         for page in range(1, PAGE_LIMIT):
             url = BASE_URL + STYLE_URL_PREFIX + style + PAGINATION_URL_PREFIX + str(page)
             try:
@@ -16,7 +17,7 @@ def retrieve_style_json():
                 res_json = response.json()['Paintings']
                 if res_json is None:
                     break
-                dic[style] = res_json
+                dic[style].extend(res_json)
             except Exception as e:
                 print(str(e))
                 continue
