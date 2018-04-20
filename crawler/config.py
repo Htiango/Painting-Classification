@@ -7,7 +7,9 @@ PAGINATION_URL_PREFIX = "?json=2&page="
 
 
 # kind of styles we want
-STYLES = ["gongbi", "gothic"]
+STYLES = ["gongbi", "gothic", "northern-renaissance", 
+          "realism", "ink-and-wash-painting","abstract-art", 
+          "shin-hanga", "international-gothic", "impressionism"]
 
 # timeout for WikiArt
 # SEE https://github.com/lucasdavid/wikiart/blob/master/wikiart/settings.py
