@@ -49,11 +49,12 @@ def retrieve_image():
             count += 1
             url = paints_info["image"]
             title = paints_info["title"]
+            name = url.split('/')[-1]
 
             try: 
                 response = requests.get(url, timeout=PAINTINGS_REQUEST_TIMEOUT, stream=True)
 
-                filepath = os.path.join(IMAGE_PATH, style, title + SAVE_IMAGES_IN_FORMAT)
+                filepath = os.path.join(IMAGE_PATH, style, name)
 
                 # print(filepath)
 
