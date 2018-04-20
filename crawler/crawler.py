@@ -39,6 +39,7 @@ def retrieve_image():
     success = 0
 
     for style in paints_styles_info.keys():
+    	print("starting on style:" + style)
         paths_infos = paints_styles_info[style]
 
         os.makedirs(os.path.join(IMAGE_PATH, style), exist_ok=True)
