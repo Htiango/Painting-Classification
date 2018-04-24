@@ -13,6 +13,8 @@ import torch
 import torchvision.models as models
 from torch.autograd import Variable
 import argparse
+from PIL import ImageFile
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 def crop_and_scale_image(im):
     """ Crops and scales a given image. 
@@ -110,24 +112,34 @@ def fnames_to_features(fnames, vgg):
             fnames (list) : A list of filenames
             vgg (pytorch model) : a pretrained VGG16 model
         Returns: 
-            (pytorch Variable) : a (m x 4608)-dimensional Variable of features generated from the VGG model,
+            (np array) : a (m x 4608)-dimensional Variable of features generated from the VGG model,
                                  where m is the number of filenames
     """
     try:
         sample = fname_to_vgg_input(fnames[0])
         size = sample.shape
-        vgg_input = np.zeros((len(fnames), size[0], size[1], size[2]))
+        sample_num = len(fnames)
+        print("Total number of input are: " + str(sample_num))
+        print("Total batch number are: " + str(sample_num // batch_size))
+        
     except:
         print("Exception!")
         return None
+
+    feature_ls = []
+    for batch_idx in range(sample_num // batch_size):
+        vgg_input = np.zeros((batch_size, size[0], size[1], size[2]))
+        start = batch_idx * batch_size
+        for i in range(batch_size):
+            fname = fnames[i + start]
+            vgg_input[i] = fname_to_vgg_input(fname)
+        vgg_input = Variable(torch.Tensor(vgg_input))
+        feature = vgg.features(vgg_input).view(batch_size, -1).data.numpy()
+        feature_ls.extend(feature)
+        print("[" + str(batch_idx) + "]: finish partial painting")
     
-    for i, fname in enumerate(fnames):
-        vgg_input[i] = fname_to_vgg_input(fname)
-        print("[" + str(i) + "]: finish processing painting #" + os.path.split(fname)[-1])
-    print("Generating features ...")
-    vgg_input = Variable(torch.Tensor(vgg_input))
-    print("Finish generating features!")
-    X = vgg.features(vgg_input).view(len(fnames), -1)
+    X = np.concatenate([[feat] for feat in feature_ls])
+    print(X.shape)
     return X
 
 
@@ -154,6 +166,12 @@ def main():
     args = parser.parse_args()
 
     im_paths = get_fnames()
+
+    # for fname in im_paths:
+    #     print("processing: " + fname)
+    # fname_to_vgg_input("../data/paintings/abstract-art/special-no-32.jpg") 
+
+
     print(len(im_paths))
     P = np.random.permutation(len(im_paths))
     
@@ -176,7 +194,7 @@ def main():
     print()
 
     X_tr = fnames_to_features(fnames_tr, vgg_model)
-    np.savetxt(X_tr_path, X_tr.data.numpy())
+    np.savetxt(X_tr_path, X_tr)
     print("Saving X_tr features")
     print()
 
@@ -187,7 +205,7 @@ def main():
 
 
     X_va = fnames_to_features(fnames_va, vgg_model)
-    np.savetxt(X_va_path, X_va.data.numpy())
+    np.savetxt(X_va_path, X_va)
     print("Saving X_va features")
     print()
 
@@ -197,7 +215,7 @@ def main():
     print()
 
     X_te = fnames_to_features(fnames_te, vgg_model)
-    np.savetxt(X_te_path, X_te.data.numpy())
+    np.savetxt(X_te_path, X_te)
     print("Saving X_te features")
     print()
 

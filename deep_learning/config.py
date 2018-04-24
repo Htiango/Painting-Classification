@@ -28,3 +28,6 @@ Y_va_path = "../data/features/VGG_Y_va.txt"
 te_path = "../data/features/te.txt"
 X_te_path = "../data/features/VGG_X_te.txt"
 Y_te_path = "../data/features/VGG_Y_te.txt"
+
+
+batch_size = 32
