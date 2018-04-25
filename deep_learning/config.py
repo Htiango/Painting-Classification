@@ -3,8 +3,11 @@ import os
 
 dname = "../data/paintings/"
 
+training_ratio = 0.7
 
 img_size = 100
+
+img_size_cnn = 100
 
 # western style is 1, eastern style is 0
 painting_type_dic={ "gongbi": 0, 
@@ -39,6 +42,16 @@ Y_va_path = "../data/features/VGG_Y_va.txt"
 te_path = "../data/features/te.txt"
 X_te_path = "../data/features/VGG_X_te.txt"
 Y_te_path = "../data/features/VGG_Y_te.txt"
+
+
+# cnn preprocessing path
+tr_path_cnn = "../data/features_cnn/tr.text"
+X_tr_path_cnn = "../data/features_cnn/X_tr.txt"
+Y_tr_path_cnn = "../data/features_cnn/Y_tr.txt"
+
+te_path_cnn = "../data/features_cnn/te.text"
+X_te_path_cnn = "../data/features_cnn/X_te.txt"
+Y_te_path_cnn = "../data/features_cnn/Y_te.txt"
 
 
 batch_size = 32
