@@ -26,7 +26,7 @@ y_te = np.loadtxt("data/features/VGG_Y_te.txt", dtype=int)
 print("data loaded")
 
 
-# processing data: only choose 2 realism and ink
+# processing data: transform it into western and eastern styles
 X_tr = X_tr[(y_tr==0) | (y_tr==2) | (y_tr==5) | (y_tr==8)]
 y_tr = y_tr[(y_tr==0) | (y_tr==2) | (y_tr==5) | (y_tr==8)]
 y_tr[(y_tr==2)] = 0
