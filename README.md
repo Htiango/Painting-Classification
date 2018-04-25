@@ -14,7 +14,7 @@ And the VGG_16 features as well as the labels will be generated into `data/featu
 
 After generating the VGG_16 features, we use validation data to choose the best kernel for SVM model. The result is shown below:
 
-![Screen Shot 2018-04-24 at 9.21.39 PM](https://oh1ulkf4j.qnssl.com/Screen Shot 2018-04-24 at 9.21.39 PM.png)
+![Screen Shot 2018-04-24 at 9.21.39 PM](https://oh1ulkf4j.qnssl.com/Screen%20Shot%202018-04-24%20at%209.21.39%20PM.png)
 
 We achieve a 88.3% accuracy on the testing dataset.
 
