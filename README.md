@@ -6,6 +6,21 @@ Later we will move further to classify the paintings based on painters or more s
 ## Data collecting
 The data we use in this task is from *WikiArt*. The collecting method is listed in `crawler/`. 
 
+The collected data information is listed below: </br>
+
+| styles  | number  | Note |
+|---|---|---|
+| impressionism  | 1135  | Western |
+| international-gothic  | 236  | Western | 
+| shin-hanga  | 420  | Eastern | 
+| abstract-art  | 1109  | Western | 
+| ink-and-wash-painting  | 678  | Eastern | 
+| realism  | 1136  | Western | 
+| northern-renaissance  | 1098  | Western | 
+| gothic  |  33 | Western | 
+| gongbi  | 39  | Eastern | 
+| | 5884 | |
+
 ## Classification methods
 ### SVM classification
 
