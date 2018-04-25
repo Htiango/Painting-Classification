@@ -75,25 +75,9 @@ def VGG_16():
     vgg = models.vgg16(pretrained=True)
     return vgg
 
-def fnames_to_labels(fnames):
-    """ Given a list of filenames, generate the corresponding array of labels
-        Args: 
-            fnames (list) : A list of filenames
-        Returns:
-            dict: a dict recording the index of each label 
-            (numpy ndarray) : a 1D array of numerical labels
-    """
-    label_all = [fname_to_type(fname) for fname in fnames]
-    label_ls = sorted(list(set(label_all)))
-    print(len(label_ls))
-    label_dic = {}
-    for i, label in enumerate(label_ls):
-        label_dic[label] = i
-    
-    labels = np.array([label_dic[label] for label in label_all])
-    return label_dic, labels
 
-def fnames_to_labels_binary(fnames):
+
+def fnames_to_labels(fnames, mode="stype"):
     """ Given a list of filenames, generate western or eastern labels
         Args: 
             fnames (list) : A list of filenames
@@ -102,26 +86,33 @@ def fnames_to_labels_binary(fnames):
     """
     label_all = [fname_to_type(fname) for fname in fnames]
     
-    labels = np.array([painting_type_dic[label] 
+    if mode=="binary":
+        dic = painting_type_dic
+    else:
+        dic = painting_label_dic
+
+    labels = np.array([dic[label] 
                        for label in label_all])
     return labels
 
-def fnames_to_features(fnames, vgg):
+def fnames_to_features(fnames, vgg, mode="style"):
     """ Given a list of filenames and a VGG16 model, generate the corresponding array of VGG features
         Args: 
             fnames (list) : A list of filenames
             vgg (pytorch model) : a pretrained VGG16 model
         Returns: 
-            (np array) : a (m x 4608)-dimensional Variable of features generated from the VGG model,
+            X (np array) : a (m x 4608)-dimensional Variable of features generated from the VGG model,
                                  where m is the number of filenames
+            Y (np array) : labels
     """
     try:
         sample = fname_to_vgg_input(fnames[0])
         size = sample.shape
         sample_num = len(fnames)
+        batch_num = sample_num // batch_size
         print("Total number of input are: " + str(sample_num))
-        print("Total batch number are: " + str(sample_num // batch_size))
-        
+        print("Total batch number are: " + str(batch_num))
+        print("Total number of actual input are: " + str(batch_num * batch_size))
     except:
         print("Exception!")
         return None
@@ -140,14 +131,15 @@ def fnames_to_features(fnames, vgg):
     
     X = np.concatenate([[feat] for feat in feature_ls])
     print(X.shape)
-    return X
+    Y = fnames_to_labels(fnames[: batch_num * batch_size], mode)
+    return X, Y
 
 
 def get_fnames():
     im_paths = []
     for sub_dir in os.listdir(dname):
         path = dname+sub_dir + '/'
-        print(path)
+        # print(path)
         try:
             for fname in os.listdir(path):
                 if fname.endswith(".jpg"):
@@ -158,25 +150,16 @@ def get_fnames():
             continue
     return np.array(im_paths)
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-m", "--mode", help = "select mode by 'type' or binary",
-        choices = ["binary", "type"], default = "binary")
 
-    args = parser.parse_args()
-
+def generator(args):
+    mode = args.mode
+    print("choose mode: " + mode)
     im_paths = get_fnames()
 
-    # for fname in im_paths:
-    #     print("processing: " + fname)
-    # fname_to_vgg_input("../data/paintings/abstract-art/special-no-32.jpg") 
-
-
-    print(len(im_paths))
+    print("file number: " + str(len(im_paths)))
     P = np.random.permutation(len(im_paths))
     
     split1 = int(len(im_paths) * 0.7)
-
     split2 = split1 + int(len(im_paths) * 0.15)
     
     fnames_tr = im_paths[P[:split1]]
@@ -193,37 +176,36 @@ def main():
     print("Loaded VGG model")
     print()
 
-    X_tr = fnames_to_features(fnames_tr, vgg_model)
+    X_tr, Y_tr = fnames_to_features(fnames_tr, vgg_model, mode)
     np.savetxt(X_tr_path, X_tr)
     print("Saving X_tr features")
-    print()
-
-    Y_tr = fnames_to_labels_binary(fnames_tr)
-    np.savetxt(Y_tr_path, Y_tr)
+    np.savetxt(Y_tr_path, Y_tr, fmt='%i')
     print("Saving Y_tr features")
     print()
 
 
-    X_va = fnames_to_features(fnames_va, vgg_model)
+    X_va, Y_va = fnames_to_features(fnames_va, vgg_model, mode)
     np.savetxt(X_va_path, X_va)
     print("Saving X_va features")
-    print()
-
-    Y_va = fnames_to_labels_binary(fnames_va)
-    np.savetxt(Y_va_path, Y_va)
+    np.savetxt(Y_va_path, Y_va, fmt='%i')
     print("Saving Y_va features")
     print()
 
-    X_te = fnames_to_features(fnames_te, vgg_model)
+    X_te, Y_te = fnames_to_features(fnames_te, vgg_model, mode)
     np.savetxt(X_te_path, X_te)
     print("Saving X_te features")
-    print()
-
-    Y_te = fnames_to_labels_binary(fnames_te)
-    np.savetxt(Y_te_path, Y_te)
+    np.savetxt(Y_te_path, Y_te, fmt='%i')
     print("Saving Y_te features")
     print()
 
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-m", "--mode", help = "select mode by 'style' or binary",
+        choices = ["binary", "style"], default = "style")
+
+    args = parser.parse_args()
+    generator(args)
 
 if __name__ == "__main__":
     main()

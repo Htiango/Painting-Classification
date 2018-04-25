@@ -17,6 +17,17 @@ painting_type_dic={ "gongbi": 0,
                     "international-gothic": 1, 
                     "impressionism": 1 }
 
+
+painting_label_dic={ "gongbi": 0, 
+                    "shin-hanga": 1,
+                    "ink-and-wash-painting": 2,
+                    "gothic": 3, 
+                    "northern-renaissance": 4, 
+                    "realism": 5, 
+                    "abstract-art": 6, 
+                    "international-gothic": 7, 
+                    "impressionism": 8 }
+
 tr_path = "../data/features/tr.txt"
 X_tr_path = "../data/features/VGG_X_tr.txt"
 Y_tr_path = "../data/features/VGG_Y_tr.txt"
