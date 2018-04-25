@@ -27,16 +27,22 @@ print("data loaded")
 
 
 # processing data: only choose 2 realism and ink
-X_tr = X_tr[(y_tr==2) | (y_tr==5)]
-y_tr = y_tr[(y_tr==2) | (y_tr==5)]
+X_tr = X_tr[(y_tr==0) | (y_tr==2) | (y_tr==5) | (y_tr==8)]
+y_tr = y_tr[(y_tr==0) | (y_tr==2) | (y_tr==5) | (y_tr==8)]
+y_tr[(y_tr==2)] = 0
+y_tr[(y_tr==5) | (y_tr==8)] = 1
 print("Training number is: " + str(X_tr.shape[0]))
 
-X_va = X_va[(y_va==2) | (y_va==5)]
-y_va = y_va[(y_va==2) | (y_va==5)]
+X_va = X_va[(y_va==0) | (y_va==2) | (y_va==5) | (y_va==8)]
+y_va = y_va[(y_va==0) | (y_va==2) | (y_va==5) | (y_va==8)]
+y_va[(y_va==2)] = 0
+y_va[(y_va==5) | (y_va==8)] = 1
 print("Validation number is: " + str(X_va.shape[0]))
 
-X_te = X_te[(y_te==2) | (y_te==5)]
-y_te = y_te[(y_te==2) | (y_te==5)]
+X_te = X_te[(y_te==0) | (y_te==2) | (y_te==5) | (y_te==8)]
+y_te = y_te[(y_te==0) | (y_te==2) | (y_te==5) | (y_te==8)]
+y_te[(y_te==2)] = 0
+y_te[(y_te==5) | (y_te==8)] = 1
 print("Testing number is: " + str(X_te.shape[0]))
 
 print("Finish selecting")
