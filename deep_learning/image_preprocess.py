@@ -13,14 +13,18 @@ def get_fnames():
     im_paths = []
     for sub_dir in os.listdir(dname):
         path = dname+sub_dir + '/'
-        # print(path)
+        print(path)
         try:
+            print(len(os.listdir(path)))
             for fname in os.listdir(path):
-                if fname.endswith(".jpg"):
+                if fname.endswith(".jpg") or fname.endswith(".JPG") or fname.endswith("Jpg"):
                     tmp = path + fname
                     im_paths.append(tmp)
+                else:
+                	print(fname)
                     # print(tmp)
         except:
+            print("Exception!")
             continue
     return np.array(im_paths)
 
