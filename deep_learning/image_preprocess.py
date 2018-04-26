@@ -62,7 +62,7 @@ def fname_to_vgg_input(fname):
     im = Image.open(fname)
     im = crop_and_scale_image(im)
     im = im.convert('RGB')
-    im.save("thumbnail.JPEG")
+    # im.save("thumbnail.JPEG")
 
     res = np.array(im)
 
@@ -116,7 +116,7 @@ def main():
     im_paths = get_fnames()
     print("file number: " + str(len(im_paths)))
     P = np.random.permutation(len(im_paths))
-    split = int(len(im_paths) * 0.7)
+    split = int(len(im_paths) * training_ratio)
 
     fnames_tr = im_paths[P[:split]]
     np.savetxt(tr_path_cnn, fnames_tr, fmt='%s')

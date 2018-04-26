@@ -3,7 +3,7 @@ import os
 
 dname = "../data/paintings/"
 
-training_ratio = 0.7
+training_ratio = 0.9
 
 img_size = 100
 
