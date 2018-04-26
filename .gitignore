@@ -7,7 +7,13 @@ __pycache__/
 *.so
 
 # data
-/data
+data/
+
+# models
+models/
+
+# reference
+reference/
 
 # Distribution / packaging
 .Python
