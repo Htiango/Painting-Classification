@@ -33,8 +33,7 @@ Add the lib folder/files to path for matlab.
 Run main.m
 
 
-### SVM classification
-
+### Transfer Learning
 Here we use VGG_16 to generate image features. The generating as well as processing methods can be seen in `deep_learning/features_generator.py`. </br>
 And the VGG_16 features as well as the labels will be generated into `data/features/` directory.
 
