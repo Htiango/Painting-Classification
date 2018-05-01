@@ -22,6 +22,13 @@ The collected data information is listed below: </br>
 | | 5884 | |
 
 ## Classification methods
+### Logistic classification
+Use crawler to download images
+Download lib files from https://www.mathworks.com/matlabcentral/fileexchange/55863-logistic-regression-for-classification
+Add the lib folder/files to path for matlab
+Run main.m
+
+
 ### SVM classification
 
 Here we use VGG_16 to generate image features. The generating as well as processing methods can be seen in `deep_learning/features_generator.py`. </br>
