@@ -58,7 +58,7 @@ We find out that Logistic regression model is the best, so we use Logistic regre
 A tutorial of how to use our CNN model is in `deep_learning/cnn_style_classification.ipynb` <br>
 You can also use `deep_learning/main.py` to do training and testing via command line. (Use `python3 main.py -h` to get instruction)<br>
 
-We use CNN model to do training on Realism and Abstract-art. The model structure is listed as below:
+We use CNN model to do training on Realism and Abstract-art. The model structure is listed as below: (*Attention: there is a typo when drawing: after the last polling, the size should be 13 x 13 x 64 instead of 12 x 12 x 64, the flatten fully connected layer should change to 10816 as well*)
 
 ![example](https://oh1ulkf4j.qnssl.com/example.png)
 
