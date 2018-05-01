@@ -23,9 +23,13 @@ The collected data information is listed below: </br>
 
 ## Classification methods
 ### Logistic classification
+
 Use crawler to download images
+
 Download lib files from https://www.mathworks.com/matlabcentral/fileexchange/55863-logistic-regression-for-classification
-Add the lib folder/files to path for matlab
+
+Add the lib folder/files to path for matlab.
+
 Run main.m
 
 
