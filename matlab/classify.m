@@ -1,7 +1,7 @@
 % use library from https://www.mathworks.com/matlabcentral/fileexchange/55863-logistic-regression-for-classification
 function classify(styles_name)
-file_set_1 = dir(['data/paintings/' , styles_name{1}]);
-file_set_2 = dir(['data/paintings/' , styles_name{2}]);
+file_set_1 = dir(['../data/paintings/' , styles_name{1}]);
+file_set_2 = dir(['../data/paintings/' , styles_name{2}]);
 train_size = 500;
 N1 = train_size;
 N2 = train_size;
@@ -21,7 +21,7 @@ while(i < N1)
         N1 = N1 + 1;
         continue
     end
-    pic_name = [ 'data/paintings/', styles_name{1},'/', file_set_1(i).name];
+    pic_name = [ '../data/paintings/', styles_name{1},'/', file_set_1(i).name];
     try
         img = imread(pic_name); 
     catch
@@ -49,7 +49,7 @@ while(i < N2)
         N2 = N2 + 1;
         continue
     end
-    pic_name = [ 'data/paintings/', styles_name{2},'/', file_set_2(i).name];
+    pic_name = [ '../data/paintings/', styles_name{2},'/', file_set_2(i).name];
     try
         img = imread(pic_name); 
     catch
@@ -84,7 +84,7 @@ while(i < t1)
         t1 = t1 + 1;
         continue
     end
-    pic_name = [ 'data/paintings/', styles_name{1},'/', file_set_1(N1 + i).name];
+    pic_name = [ '../data/paintings/', styles_name{1},'/', file_set_1(N1 + i).name];
     try
         img = imread(pic_name); 
     catch
@@ -112,7 +112,7 @@ while(i < t2)
         t2 = t2 + 1;
         continue
     end
-    pic_name = [ 'data/paintings/', styles_name{2},'/', file_set_2(N2 + i).name];
+    pic_name = [ '../data/paintings/', styles_name{2},'/', file_set_2(N2 + i).name];
     try
         img = imread(pic_name); 
     catch
