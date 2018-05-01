@@ -1,5 +1,5 @@
 # Image-Classification
-Classifying the paintings into two categories: Eastern and Western. 
+Classifying the paintings based on their styles. 
 
 Later we will move further to classify the paintings based on painters or more specific styles.
 
@@ -33,7 +33,7 @@ Use crawler to download images
 
 Download lib files from https://www.mathworks.com/matlabcentral/fileexchange/55863-logistic-regression-for-classification
 
-Add the lib folder/files to path for matlab.
+Add the lib folder/files to path for Matlab.
 
 Run main.m
 
