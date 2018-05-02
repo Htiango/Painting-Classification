@@ -60,7 +60,9 @@ You can also use `deep_learning/main.py` to do training and testing via command 
 
 We use CNN model to do training on Realism and Abstract-art. The model structure is listed as below: (*Attention: there is a typo when drawing: after the last polling, the size should be 13 x 13 x 64 instead of 12 x 12 x 64, the flatten fully connected layer should change to 10816 as well*)
 
-![example](https://oh1ulkf4j.qnssl.com/example.png)
+![example-1](https://oh1ulkf4j.qnssl.com/example-1.png)
+
+
 
 The Training steps are:
 
