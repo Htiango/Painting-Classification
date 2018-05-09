@@ -31,7 +31,9 @@ It will crop images to square and resize them into 100*100 pixels.
 
 Use crawler to download images
 
-Download lib files from https://www.mathworks.com/matlabcentral/fileexchange/55863-logistic-regression-for-classification
+Download lib file from https://www.mathworks.com/matlabcentral/fileexchange/55863-logistic-regression-for-classification
+
+Create a new folder 'lib' in Painting-Classification/HOG/, then put file downloaded in this folder and unzip it.
 
 Add the lib folder/files to path for Matlab.
 
