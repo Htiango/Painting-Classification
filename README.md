@@ -1,7 +1,14 @@
-# Image-Classification
-Classifying the paintings based on their styles. 
+# Painting-Classification
+This project classifies paintings based on their styles. 
 
-Later we will move further to classify the paintings based on painters or more specific styles.
+We use deep learning (cnn), transfer learning (vgg-16) and Logistic regression to do the style classification. 
+
+If you want to start from beginning, please read the following steps, which will help!
+
+Feel free to reach out us if you encounter any problem:
++ Tianyu Hong (hongty106@gmail.com): Data collection, deep learning, transfer learning
++ Xiuyang Duan (xiuyangd@andrew.cmu.edu): logistic regression, image feature extracting
+
 
 ## Data 
 ### Collecting
@@ -27,9 +34,7 @@ Use the script `deep_learning/image_preprocessing` to do image preprocessing is 
 It will crop images to square and resize them into 100*100 pixels. 
 
 ## Classification methods
-### Logistic classification
-
-Use crawler to download images
+### Logistic regression
 
 Download lib file from https://www.mathworks.com/matlabcentral/fileexchange/55863-logistic-regression-for-classification
 
